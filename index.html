@@ -53,6 +53,11 @@
       });
 
 
+      stopButton.addEventListener('click', () => {
+       clearInterval(clock);
+       startButton.disabled = false;
+     });
+
 
 
 
