@@ -59,6 +59,16 @@
      });
 
 
+     resetButton.addEventListener('click', () => {
+             clearInterval(clock);
+             startButton.disabled = false;
+             secondCount = 0;
+             displayCount();
+           });
+
+
+           displayCount();
+
 
 
     </script>
