@@ -47,6 +47,15 @@
       const stopButton = document.querySelector('.stop');
       const resetButton = document.querySelector('.reset');
 
+      startButton.addEventListener('click', () => {
+        clock = setInterval(displayCount, 1000);
+        startButton.disabled = true;
+      });
+
+
+
+
+
     </script>
   </body>
 </html>
