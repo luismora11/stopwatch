@@ -2,6 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css"
     <title>Simple setInterval clock</title>
     <style>
       p {
@@ -10,16 +11,64 @@
     </style>
   </head>
   <body>
+    <div>
     <p class="clock"></p>
+    <div>
+    <p><button class="start">Start</button><button class="stop">Stop</button><button class="reset">Reset</button></p>
     <script>
-      function displayTime() {
-        let date = new Date();
-        let time = date.toLocaleTimeString();
-        document.querySelector('.clock').textContent = time;
+
+      let secondCount = 0;
+
+      let clock;
+
+      const displayPara = document.querySelector('.clock');
+
+
+      function displayCount() {
+
+        let hours = Math.floor(secondCount/3600);
+        let minutes = Math.floor((secondCount % 3600)/60);
+        let seconds = Math.floor(secondCount % 60)
+
+
+        let displayHours = (hours < 10) ? '0' + hours : hours;
+        let displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
+        let displaySeconds = (seconds < 10) ? '0' + seconds : seconds;
+
+
+        displayPara.textContent = displayHours + ':' + displayMinutes + ':' + displaySeconds;
+
+
+        secondCount++;
       }
 
-      displayTime();
-      const createClock = setInterval(displayTime, 1000);
+
+      const startButton = document.querySelector('.start');
+      const stopButton = document.querySelector('.stop');
+      const resetButton = document.querySelector('.reset');
+
+
+      startButton.addEventListener('click', () => {
+        clock = setInterval(displayCount, 1000);
+        startButton.disabled = true;
+      });
+
+
+      stopButton.addEventListener('click', () => {
+        clearInterval(clock);
+        startButton.disabled = false;
+      });
+
+
+      resetButton.addEventListener('click', () => {
+        clearInterval(clock);
+        startButton.disabled = false;
+        secondCount = 0;
+        displayCount();
+      });
+
+
+      displayCount();
     </script>
   </body>
 </html>
